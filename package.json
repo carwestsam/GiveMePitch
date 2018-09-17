@@ -7,10 +7,12 @@
   "private": true,
   "scripts": {
     "build": "webpack --config build/webpack.config.dev.js",
-    "start": "webpack-dev-server --config build/webpack.config.dev.js --mode development --open"
+    "start": "webpack-dev-server --config build/webpack.config.dev.js --mode development --open",
+    "dev": "webpack-dev-server --config build/webpack.config.dev.js"
   },
   "dependencies": {
     "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "lodash": "^4.17.11",
     "pizzicato": "^0.6.3",
     "vue": "^2.5.17",
