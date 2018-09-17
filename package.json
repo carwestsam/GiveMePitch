@@ -7,14 +7,15 @@
   "private": true,
   "scripts": {
     "build": "webpack --config build/webpack.config.dev.js",
-    "start": "webpack-dev-server --config build/webpack.config.dev.js --mode development --open",
-    "dev": "webpack-dev-server --config build/webpack.config.dev.js"
+    "start": "webpack-dev-server --config build/webpack.config.dev.js --mode development --hot --inline --open"
   },
   "dependencies": {
     "css-loader": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
     "lodash": "^4.17.11",
     "pizzicato": "^0.6.3",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "vue": "^2.5.17",
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^4.1.2",

@@ -10,18 +10,18 @@ module.exports = {
     './src/app.js'
   ],
 
-  devServer: {
-      hot: true,
-      watchOptions: {
-          poll: true
-      }
-  },
-
   module: {
     rules: [
       {
         test: /\.vue$/,
         use: 'vue-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+            'vue-style-loader',
+            'css-loader'
+        ]
       }
     ]
   },
