@@ -1,0 +1,14 @@
+{
+  "name": "GiveMePitch",
+  "version": "0.0.0",
+  "repository": "https://github.com/carwestsam/GiveMePitch.git",
+  "author": "Cedric Song <carwestsam@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "pizzicato": "^0.6.3",
+    "webpack": "^4.19.0",
+    "webpack-cli": "^3.1.0"
+  }
+}
