@@ -1,8 +1,18 @@
 <template>
   <div>
-    <h1 class="center-content">Hello World!</h1>
+    <h1 class="center-content" >Hello World!</h1>
+    <soundButton pitch="A" frequency="440"></soundButton>
   </div>
 </template>
+
+<script>
+import soundButton from './components/soundButton.vue'
+export default {
+    components: {
+        soundButton
+    }
+}
+</script>
 
 <style scoped>
 
