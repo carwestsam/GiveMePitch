@@ -1,16 +1,15 @@
 <template>
     <div>
-        <div v-for="(value, key) in soundSwitchs"
-            v-bind:key="key"
-            @click="trigger(key)"
-            class="ikey"
-            v-bind:class="{active: soundSwitchs[key]}"
-            > {{key}} </div>
+        <keyGroup v-bind:keys="this.group1" v-bind:trigger="trigger"></keyGroup>
+        <keyGroup v-bind:keys="this.group2" v-bind:trigger="trigger"></keyGroup>
+        <keyGroup v-bind:keys="this.group3" v-bind:trigger="trigger"></keyGroup>
+        <keyGroup v-bind:keys="this.group4" v-bind:trigger="trigger"></keyGroup>
     </div>
 </template>
 
 <script>
 import soundButton from '../components/soundButton.vue'
+import keyGroup from '../components/keyGroup.vue'
 import {Howl, Howler} from 'howler'
 import Pizzicato from 'pizzicato'
 import Tone from 'tone'
@@ -22,22 +21,27 @@ const sounds = [['C2', 'C#2', 'D2', 'D#2', 'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2',
                 ['C5', 'C#5', 'D5', 'D#5', 'E5', 'F5', 'F#5', 'G4', 'G#5', 'A5', 'A#5', 'B5']]
 
 export default {
-    beforeCreate () {
-    },
     data () {
         let soundSwitchs = {}
         _.each(_.flatten(sounds), key => {
             soundSwitchs[key] = false
         })
+        let group1 = sounds[0];
+        let group2 = sounds[1];
+        let group3 = sounds[2];
+        let group4 = sounds[3];
         return {
             soundSwitchs,
+            group1,
+            group2,
+            group3,
+            group4,
             polySynth : new Tone.PolySynth(16, Tone.Synth).toMaster()
         }
     },
     methods: {
         trigger: function (pitch) {
             console.log('trigger', pitch)
-            
             let current = () => {
                 let soundArray = []
                 for ( let pitch in this.soundSwitchs) {
@@ -57,20 +61,12 @@ export default {
         }
     },
     components: {
-        soundButton
+        soundButton,
+        keyGroup
     }
 }
 </script>
 
 <style scoped>
-.ikey {
-    display: inline-block;
-    margin: .2em;
-    font-size: 1em;
-    padding: 1em;
-    background-color: aqua;
-}
-.ikey.active {
-    background-color: fuchsia;
-}
+
 </style>
