@@ -1,5 +1,5 @@
 <template>
-<div class="sButton playing" @click="toggle()">
+<div class="sButton" v-bind:class="{active: this.switch}" @click="toggle()">
     {{this.pitch}}
 </div>
 </template>
@@ -19,18 +19,16 @@ export default {
             }),
             switch: false
         }
-        return {
-            soundObject
-        }
+        return soundObject
     },
     methods: {
         toggle: function () {
-            if ( this.soundObject.switch == false){
-                this.soundObject.wave.play()
-                this.soundObject.switch=true
-            } else if (this.soundObject.switch == true){
-                this.soundObject.wave.pause()
-                this.soundObject.switch=false
+            if ( this.switch == false){
+                this.wave.play()
+                this.switch=true
+            } else if (this.switch == true){
+                this.wave.pause()
+                this.switch=false
             }
         }
     }
@@ -42,13 +40,12 @@ export default {
     display: block;
     max-width: 5em;
     text-align: center;
-}
-.stop {
-    background-color: red;
-}
-
-.playing {
+    border: black solid 1px;
+    margin: 2px;
     background-color: aquamarine;
+}
+.active {
+    background-color: red;
 }
 
 </style>

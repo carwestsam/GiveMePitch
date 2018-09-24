@@ -1,15 +1,15 @@
 <template>
   <div>
     <h1 class="center-content" >Hello World!</h1>
-    <soundButton pitch="A" frequency="440"></soundButton>
+    <keyboard></keyboard>
   </div>
 </template>
 
 <script>
-import soundButton from './components/soundButton.vue'
+import keyboard from './pages/keyboard.vue'
 export default {
     components: {
-        soundButton
+        keyboard
     }
 }
 </script>
