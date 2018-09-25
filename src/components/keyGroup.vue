@@ -1,7 +1,7 @@
 <template>
     <div class="key-group">
         <div class="key-group-inner">
-            <div   v-for="key in keys"
+            <div v-for="key in this.keys"
                 v-bind:key="key"
                 class="key"
                 @click="itrigger(key)"
@@ -15,14 +15,19 @@
 
 <script>
 export default {
-    props: ['keys', 'trigger'],
+    props: ['trigger', 'start_note'],
     data () {
+        let keys = []
+        for ( let i =0; i<12; i++ ){
+            keys.push(this.$store.getters.getNoteByCode(i+this.start_note))
+        }
         let soundSwitchs = {}
-        _.each(this.keys, key => {
+        _.each(keys, key => {
             soundSwitchs[key] = false
         })
         return {
-            soundSwitchs
+            soundSwitchs,
+            keys
         }
     },
     methods: {
@@ -62,6 +67,7 @@ export default {
     font-size: 1.2em;
     width: 14.28%;
     height: 2em;
+    line-height: 1;
 
     border: gray 2px solid;
     padding: .4em;

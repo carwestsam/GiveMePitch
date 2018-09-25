@@ -1,9 +1,9 @@
 <template>
     <div>
-        <keyGroup v-bind:keys="this.group1" v-bind:trigger="trigger"></keyGroup>
-        <keyGroup v-bind:keys="this.group2" v-bind:trigger="trigger"></keyGroup>
-        <keyGroup v-bind:keys="this.group3" v-bind:trigger="trigger"></keyGroup>
-        <keyGroup v-bind:keys="this.group4" v-bind:trigger="trigger"></keyGroup>
+        <keyGroup v-bind:start_note="24" v-bind:trigger="trigger"></keyGroup>
+        <keyGroup v-bind:start_note="36" v-bind:trigger="trigger"></keyGroup>
+        <keyGroup v-bind:start_note="48" v-bind:trigger="trigger"></keyGroup>
+        <keyGroup v-bind:start_note="60" v-bind:trigger="trigger"></keyGroup>
     </div>
 </template>
 
@@ -26,16 +26,8 @@ export default {
         _.each(_.flatten(sounds), key => {
             soundSwitchs[key] = false
         })
-        let group1 = sounds[0];
-        let group2 = sounds[1];
-        let group3 = sounds[2];
-        let group4 = sounds[3];
         return {
             soundSwitchs,
-            group1,
-            group2,
-            group3,
-            group4,
             polySynth : new Tone.PolySynth(16, Tone.Synth).toMaster()
         }
     },

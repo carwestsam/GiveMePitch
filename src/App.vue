@@ -1,12 +1,14 @@
 <template>
-  <div class='iapp'>
-    <h1 class="center-content" >合唱忍者的给音器</h1>
+  <v-app class='iapp'>
+    <h1 class="center-content" >合唱忍者的给音键盘</h1>
     <keyboard></keyboard>
-  </div>
+  </v-app>
 </template>
 
 <script>
 import keyboard from './pages/keyboard.vue'
+import 'vuetify/dist/vuetify.min.css'
+
 export default {
     components: {
         keyboard
@@ -22,7 +24,6 @@ body, div, p, header, footer, h1, h2, h3, h4, h5, h6, span {
   font-size: 16px;
 }
 </style>
-
 
 <style scoped>
 
