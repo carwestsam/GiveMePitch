@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import _ from 'lodash'
+import Tone from 'tone'
 
 const sounds = [['C2', 'C#2', 'D2', 'D#2', 'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2'],
                 ['C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3'],
@@ -25,22 +26,36 @@ const startNames = ['Cb', 'C', 'C#']
 function getStore () {
     Vue.use(Vuex)
     let soundSwitchs = {}
-    _.each(_.flatten(sounds), key => {
+    _.each(keyCodes, key => {
         soundSwitchs[key] = false
     })
     return new Vuex.Store({
         state: {
-            soundSwitchs
+            soundSwitchs,
+            synth : new Tone.PolySynth(16, Tone.Synth).toMaster()
         },
         mutations: {
             trigger (state, keyCode) {
-                let current = state.soundSwitchs[keyCode]
-                this.state.soundSwitchs[keyCode] = !current
+                state.soundSwitchs[keyCode] = ! state.soundSwitchs[keyCode]
             }
         },
         getters: {
             getNoteByCode: (state) => (code) => {
                 return keyNames[code]
+            },
+            getCurrentKeys: (state) => {
+                let current = []
+                for ( let i=0; i<96; i++ ){
+                    if (state.soundSwitchs[i] == true)
+                        current.push(keyNames[i])
+                }
+                return current
+            },
+            isActive: state => code => {
+                return state.soundSwitchs[code]
+            },
+            synth: (state) => {
+                return state.synth
             }
         }
     })

@@ -2,12 +2,12 @@
     <div class="key-group">
         <div class="key-group-inner">
             <div v-for="key in this.keys"
-                v-bind:key="key"
+                v-bind:key="key.code"
                 class="key"
                 @click="itrigger(key)"
-                v-bind:class="{active: soundSwitchs[key]}"
+                v-bind:class="{active: isKeyActive(key.code)}"
                 >
-                {{key}}
+                {{key.note}}
             </div>
         </div>
     </div>
@@ -15,29 +15,29 @@
 
 <script>
 export default {
-    props: ['trigger', 'start_note'],
+    props: ['synth', 'start_note'],
     data () {
         let keys = []
         for ( let i =0; i<12; i++ ){
-            keys.push(this.$store.getters.getNoteByCode(i+this.start_note))
+            keys.push({
+                note:this.$store.getters.getNoteByCode(i+this.start_note),
+                code: i+this.start_note
+            })
         }
-        let soundSwitchs = {}
-        _.each(keys, key => {
-            soundSwitchs[key] = false
-        })
         return {
-            soundSwitchs,
             keys
         }
     },
     methods: {
         itrigger: function (key){
-            console.log('itrigger', key);
-            this.soundSwitchs[key] = !this.soundSwitchs[key]
-            console.log(key, this.soundSwitchs[key])
-            this.trigger(key)
+            this.$store.getters.synth.triggerRelease(this.$store.getters.getCurrentKeys)
+            this.$store.commit('trigger', key.code)
+            this.$store.getters.synth.triggerAttack(this.$store.getters.getCurrentKeys)
+        },
+        isKeyActive: function (keyCode) {
+            return this.$store.getters.isActive(keyCode)
         }
-    }
+    },
 }
 </script>
 
