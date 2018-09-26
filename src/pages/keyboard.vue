@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1 class="center-content white">合唱忍者的给音键盘</h1>
         <keyGroup v-bind:start_note="startPoint+36" ></keyGroup>
         <keyGroup v-bind:start_note="startPoint+24" ></keyGroup>
         <keyGroup v-bind:start_note="startPoint+12" ></keyGroup>
@@ -34,5 +35,9 @@ export default {
 </script>
 
 <style scoped>
-
+h1 {
+  font-size: 2em;
+  padding: 1em 0;
+  text-align: center;
+}
 </style>

@@ -1,17 +1,19 @@
 <template>
-  <v-app class='iapp'>
-    <h1 class="center-content" >合唱忍者的给音键盘</h1>
+  <v-app class='iapp grey'>
     <keyboard></keyboard>
+    <ifooter></ifooter>
   </v-app>
 </template>
 
 <script>
 import keyboard from './pages/keyboard.vue'
+import ifooter from './components/ifooter.vue'
 import 'vuetify/dist/vuetify.min.css'
 
 export default {
     components: {
-        keyboard
+        keyboard,
+        ifooter
     }
 }
 </script>
@@ -35,10 +37,6 @@ body, div, p, header, footer, h1, h2, h3, h4, h5, h6, span {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-h1 {
-  font-size: 2em;
-  padding: 1em 0;
 }
 .iapp {
   max-width: 1024px;
