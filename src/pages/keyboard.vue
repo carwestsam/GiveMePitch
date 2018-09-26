@@ -1,9 +1,9 @@
 <template>
     <div>
-        <keyGroup v-bind:start_note="startPoint" ></keyGroup>
-        <keyGroup v-bind:start_note="startPoint+12" ></keyGroup>
-        <keyGroup v-bind:start_note="startPoint+24" ></keyGroup>
         <keyGroup v-bind:start_note="startPoint+36" ></keyGroup>
+        <keyGroup v-bind:start_note="startPoint+24" ></keyGroup>
+        <keyGroup v-bind:start_note="startPoint+12" ></keyGroup>
+        <keyGroup v-bind:start_note="startPoint" ></keyGroup>
         <toolBar></toolBar>
     </div>
 </template>
