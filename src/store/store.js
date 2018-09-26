@@ -57,7 +57,6 @@ function getStore () {
                 }
             },
             pause (state) {
-                console.log('paused', state.paused)
                 if ( state.paused.length == 0 ) {
                     state.paused = this.getters.getCurrentKeyCodes
                     state.synth.triggerRelease(this.getters.getCurrentKeys)
@@ -73,7 +72,6 @@ function getStore () {
                 }
             },
             transposingByIdx (state, idx) {
-                console.log('transposingByIdx', idx)
                 state.startIdx = idx
             }
         },

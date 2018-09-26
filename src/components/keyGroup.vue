@@ -5,11 +5,8 @@
                 v-bind:key="key.code"
                 class="key"
                 @click="trigger(key)"
-                v-hammer:press="onPress(key.note)"
                 v-bind:class="{active: isKeyActive(key.code)}"
                 >
-                                <!-- @mousedown="onPress(key.note)"
-                @mouseup="onRelease(key.note)" -->
                 {{key.note}}
             </div>
         </div>
@@ -20,7 +17,6 @@
 export default {
     props: ['start_note'],
     data () {
-        console.log('start', this.start_note)
         let keys = []
         let notes = [this.$store.getters.getNoteByCode(this.start_note),
                     '1#', '2', '2#', '3', '4', '4#',
@@ -38,9 +34,12 @@ export default {
     watch: {
         start_note: function (o, n){
             this.keys.splice(0,this.keys.length)
+            let notes = [this.$store.getters.getNoteByCode(this.start_note),
+                    '1#', '2', '2#', '3', '4', '4#',
+                     '5', '5#', '6', '6#', '7']
             for ( let i =0; i<12; i++ ){
                 this.keys.push({
-                    note:this.$store.getters.getNoteByCode(i+this.start_note),
+                    note: notes[i],
                     code: i+this.start_note
                 })
             }
@@ -51,12 +50,6 @@ export default {
             this.$store.getters.synth.triggerRelease(this.$store.getters.getCurrentKeys)
             this.$store.commit('trigger', key.code)
             this.$store.getters.synth.triggerAttack(this.$store.getters.getCurrentKeys)
-        },
-        onPress: event => key => {
-            console.log('onPress', key)
-        },
-        onRelease: function (key) {
-            console.log('onRelease', key)
         },
         isKeyActive: function (keyCode) {
             return this.$store.getters.isActive(keyCode)

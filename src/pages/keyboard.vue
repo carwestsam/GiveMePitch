@@ -27,7 +27,6 @@ export default {
         startPoint () {
             let starts = this.$store.getters.getStarts
             let startIdx = this.$store.getters.startIdx
-            console.log('computed', startIdx, starts[startIdx][0])
             return starts[startIdx][0]
         }
     }

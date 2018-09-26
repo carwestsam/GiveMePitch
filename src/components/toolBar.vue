@@ -51,7 +51,6 @@
 export default {
     data () {
         let starts = this.$store.getters.getStarts
-        console.log('starts', starts)
         return {
             starts: this.$store.getters.getStarts,
             currentStart: 1,
@@ -66,7 +65,6 @@ export default {
             this.$store.commit('pause')
         },
         transposing: function (start_idx) {
-            // console.log('transposing', start_idx)
             this.currentStart = start_idx
             this.$store.commit('transposingByIdx', start_idx)
         }
