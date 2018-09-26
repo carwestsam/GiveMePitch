@@ -4,9 +4,12 @@
             <div v-for="key in this.keys"
                 v-bind:key="key.code"
                 class="key"
-                @click="itrigger(key)"
+                @click="trigger(key)"
+                v-hammer:press="onPress(key.note)"
                 v-bind:class="{active: isKeyActive(key.code)}"
                 >
+                                <!-- @mousedown="onPress(key.note)"
+                @mouseup="onRelease(key.note)" -->
                 {{key.note}}
             </div>
         </div>
@@ -15,7 +18,7 @@
 
 <script>
 export default {
-    props: ['synth', 'start_note'],
+    props: ['start_note'],
     data () {
         let keys = []
         for ( let i =0; i<12; i++ ){
@@ -29,10 +32,16 @@ export default {
         }
     },
     methods: {
-        itrigger: function (key){
+        trigger: function (key){
             this.$store.getters.synth.triggerRelease(this.$store.getters.getCurrentKeys)
             this.$store.commit('trigger', key.code)
             this.$store.getters.synth.triggerAttack(this.$store.getters.getCurrentKeys)
+        },
+        onPress: event => key => {
+            console.log('onPress', key)
+        },
+        onRelease: function (key) {
+            console.log('onRelease', key)
         },
         isKeyActive: function (keyCode) {
             return this.$store.getters.isActive(keyCode)

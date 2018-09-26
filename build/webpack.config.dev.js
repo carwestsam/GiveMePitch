@@ -17,6 +17,11 @@ module.exports = {
         use: 'vue-loader'
       },
       {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+      },
+      {
         test: /\.css$/,
         use: [
             'vue-style-loader',

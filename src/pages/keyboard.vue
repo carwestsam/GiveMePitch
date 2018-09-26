@@ -11,8 +11,6 @@
 import keyGroup from '../components/keyGroup.vue'
 
 export default {
-    data () {
-    },
     methods: {
     },
     components: {
