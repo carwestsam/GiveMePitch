@@ -32,6 +32,12 @@ function getStore () {
         mutations: {
             trigger (state, keyCode) {
                 state.soundSwitchs[keyCode] = ! state.soundSwitchs[keyCode]
+            },
+            clearSounds (state) {
+                state.synth.triggerRelease(this.getters.getCurrentKeys)
+                for ( let i=0; i<96; i++ ){
+                    state.soundSwitchs[i] = false
+                }
             }
         },
         getters: {
