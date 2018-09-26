@@ -27,16 +27,35 @@ function getStore () {
     return new Vuex.Store({
         state: {
             soundSwitchs,
+            paused : [],
             synth : new Tone.PolySynth(16, Tone.Synth).toMaster()
         },
         mutations: {
             trigger (state, keyCode) {
+                state.paused = []
                 state.soundSwitchs[keyCode] = ! state.soundSwitchs[keyCode]
             },
             clearSounds (state) {
+                state.paused = []
                 state.synth.triggerRelease(this.getters.getCurrentKeys)
                 for ( let i=0; i<96; i++ ){
                     state.soundSwitchs[i] = false
+                }
+            },
+            pause (state) {
+                console.log('paused', state.paused)
+                if ( state.paused.length == 0 ) {
+                    state.paused = this.getters.getCurrentKeyCodes
+                    state.synth.triggerRelease(this.getters.getCurrentKeys)
+                    for ( let i=0; i<96; i++ ){
+                        state.soundSwitchs[i] = false
+                    }
+                } else {
+                    for ( let i=0; i<state.paused.length; i++ ){
+                        state.soundSwitchs[state.paused[i]] = true
+                    }
+                    state.synth.triggerAttack(this.getters.getCurrentKeys)
+                    state.paused = []
                 }
             }
         },
@@ -49,6 +68,14 @@ function getStore () {
                 for ( let i=0; i<96; i++ ){
                     if (state.soundSwitchs[i] == true)
                         current.push(keyNames[i])
+                }
+                return current
+            },
+            getCurrentKeyCodes: (state) => {
+                let current = []
+                for ( let i=0; i<96; i++ ){
+                    if (state.soundSwitchs[i] == true)
+                        current.push(i)
                 }
                 return current
             },
