@@ -15,8 +15,21 @@ const keyNames = [
     'C8', 'C#8', 'D8', 'D#8', 'E8', 'F8', 'F#8', 'G8', 'G#8', 'A8', 'A#8', 'B8',
 ]
 
-const startPoints = [11, 12, 13]
-const startNames = ['Cb', 'C', 'C#']
+const startPoints = [ 11, 12, 13,
+                      13, 14, 15,
+                      15, 16, 17,
+                      16, 17, 18,
+                      18, 19, 20,
+                      20, 21, 22,
+                      22, 23, 24]
+
+const startNames = ['Cb', 'C', 'C#',
+                    'Db', 'D', 'D#',
+                    'Eb', 'E', 'E#',
+                    'Fb', 'F', 'F#',
+                    'Gb', 'G', 'G#',
+                    'Ab', 'A', 'A#',
+                    'Bb', 'B', 'B#']
 
 function getStore () {
     Vue.use(Vuex)
@@ -28,6 +41,7 @@ function getStore () {
         state: {
             soundSwitchs,
             paused : [],
+            startIdx : 1,
             synth : new Tone.PolySynth(16, Tone.Synth).toMaster()
         },
         mutations: {
@@ -57,6 +71,10 @@ function getStore () {
                     state.synth.triggerAttack(this.getters.getCurrentKeys)
                     state.paused = []
                 }
+            },
+            transposingByIdx (state, idx) {
+                console.log('transposingByIdx', idx)
+                state.startIdx = idx
             }
         },
         getters: {
@@ -84,6 +102,15 @@ function getStore () {
             },
             synth: (state) => {
                 return state.synth
+            },
+            getStarts: state => {
+                return _.zip(startPoints, startNames)
+            },
+            startPoint: state => {
+                return startPoints[state.startIdx]
+            },
+            startIdx: state => {
+                return state.startIdx
             }
         }
     })

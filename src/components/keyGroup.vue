@@ -20,15 +20,27 @@
 export default {
     props: ['start_note'],
     data () {
+        console.log('start', this.start_note)
         let keys = []
         for ( let i =0; i<12; i++ ){
             keys.push({
-                note:this.$store.getters.getNoteByCode(i+this.start_note),
+                note: this.$store.getters.getNoteByCode(i+this.start_note),
                 code: i+this.start_note
             })
         }
         return {
             keys
+        }
+    },
+    watch: {
+        start_note: function (o, n){
+            this.keys.splice(0,this.keys.length)
+            for ( let i =0; i<12; i++ ){
+                this.keys.push({
+                    note:this.$store.getters.getNoteByCode(i+this.start_note),
+                    code: i+this.start_note
+                })
+            }
         }
     },
     methods: {
