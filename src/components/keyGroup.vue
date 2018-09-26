@@ -22,9 +22,12 @@ export default {
     data () {
         console.log('start', this.start_note)
         let keys = []
+        let notes = [this.$store.getters.getNoteByCode(this.start_note),
+                    '1#', '2', '2#', '3', '4', '4#',
+                     '5', '5#', '6', '6#', '7']
         for ( let i =0; i<12; i++ ){
             keys.push({
-                note: this.$store.getters.getNoteByCode(i+this.start_note),
+                note: notes[i],
                 code: i+this.start_note
             })
         }
