@@ -6,6 +6,7 @@ import keyboard from '../pages/keyboard.vue'
 
 const routes = [
     { path: '/profile', component: profile },
+    { path: '/', component: toc },
     { path: '/toc', component: toc },
     { path: '/keyboard', component: keyboard }
   ]
