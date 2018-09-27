@@ -24,14 +24,7 @@ jobs:
       - run: yarn build
       - setup_remote_docker:
           docker_layer_caching: true
-      # - run:
-      #     name: Install Docker client
-      #     command: |
-      #       set -x
-      #       VER="17.03.0-ce"
-      #       curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-      #       tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-      #       mv -f /tmp/docker/* /usr/bin
+
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker login -u $DOCKER_USER -p $DOCKER_PASS
@@ -39,3 +32,11 @@ jobs:
           docker tag carwestsam/givemepitch:$CIRCLE_BRANCH carwestsam/givemepitch:$TAG
           docker push carwestsam/givemepitch:$CIRCLE_BRANCH
           docker push carwestsam/givemepitch:$TAG
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "/usr/local/bin/redeploy"
