@@ -36,6 +36,6 @@ jobs:
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker build -t carwestsam/GiveMePitch:$CIRCLE_BRANCH .
-          docker tag carwestsam/GiveMePitch:$CIRCLE_BRANCH carwestsam/GiveMePitch:$TAG
-          docker push carwestsam/GiveMePitch:$CIRCLE_BRANCH
-          docker push carwestsam/GiveMePitch:$TAG
+          docker tag carwestsam/givemepitch:$CIRCLE_BRANCH carwestsam/GiveMePitch:$TAG
+          docker push carwestsam/givemepitch:$CIRCLE_BRANCH
+          docker push carwestsam/givemepitch:$TAG
