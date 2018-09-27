@@ -47,9 +47,16 @@ export default {
     },
     methods: {
         trigger: function (key){
-            this.$store.getters.synth.triggerRelease(this.$store.getters.getCurrentKeys)
-            this.$store.commit('trigger', key.code)
-            this.$store.getters.synth.triggerAttack(this.$store.getters.getCurrentKeys)
+            console.log('key', key.code, this.$store.getters.sustainPedal)
+            if ( this.$store.getters.sustainPedal == true) {
+                this.$store.getters.synth.triggerRelease(this.$store.getters.getCurrentKeys)
+                this.$store.commit('trigger', key.code)
+                this.$store.getters.synth.triggerAttack(this.$store.getters.getCurrentKeys)
+            } else {
+                let note = this.$store.getters.getNoteByCode(key.code)
+                this.$store.getters.synth.triggerAttackRelease(note, 1)
+                this.$store.commit('trigger', key.code)
+            }
         },
         isKeyActive: function (keyCode) {
             return this.$store.getters.isActive(keyCode)

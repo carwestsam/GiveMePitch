@@ -2,7 +2,9 @@
     <div>
         <v-toolbar>
             <v-btn class="orange white--text" @click="pauseSounds()">暂停</v-btn>
-            <v-btn class="red white--text" @click="clearSounds()">清除</v-btn>
+            <!-- <v-btn class="red white--text" @click="clearSounds()">清除</v-btn> -->
+            <v-btn class="red white--text"
+                    @click="sustainPedal()">{{sustainNote.note}}</v-btn>
             <v-dialog v-model="dialog" persistent max-width="290">
                 <v-btn slot="activator" color="primary" dark>移调</v-btn>
                 <v-card>
@@ -54,12 +56,18 @@ export default {
         return {
             starts: this.$store.getters.getStarts,
             currentStart: 1,
-            dialog: false
+            dialog: false,
+            sustain: this.$store.getters.sustainPedal
         }
     },
     methods: {
         clearSounds: function () {
             this.$store.commit('clearSounds')
+        },
+        sustainPedal: function () {
+            this.sustain = !this.sustain
+            this.$store.commit('clearSounds')
+            this.$store.commit('setSustain', this.sustain)
         },
         pauseSounds: function () {
             this.$store.commit('pause')
@@ -67,6 +75,21 @@ export default {
         transposing: function (start_idx) {
             this.currentStart = start_idx
             this.$store.commit('transposingByIdx', start_idx)
+        }
+    },
+    computed: {
+        sustainNote: function () {
+            const notes = [
+                {
+                    'note': '用延音',
+                },
+                {
+                    'note': '去延音',
+                }
+            ]
+            let sustain = this.$store.getters.sustainPedal
+            if (sustain == false) return notes[0]
+            if (sustain == true) return notes[1]
         }
     }
 }

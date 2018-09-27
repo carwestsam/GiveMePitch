@@ -42,12 +42,15 @@ function getStore () {
             soundSwitchs,
             paused : [],
             startIdx : 1,
+            sustainPedal : false,
             synth : new Tone.PolySynth(16, Tone.Synth).toMaster()
         },
         mutations: {
             trigger (state, keyCode) {
                 state.paused = []
-                state.soundSwitchs[keyCode] = ! state.soundSwitchs[keyCode]
+                if ( state.sustainPedal == true ){
+                    state.soundSwitchs[keyCode] = ! state.soundSwitchs[keyCode]
+                }
             },
             clearSounds (state) {
                 state.paused = []
@@ -73,6 +76,9 @@ function getStore () {
             },
             transposingByIdx (state, idx) {
                 state.startIdx = idx
+            },
+            setSustain (state, newValue) {
+                state.sustainPedal = newValue
             }
         },
         getters: {
@@ -109,6 +115,9 @@ function getStore () {
             },
             startIdx: state => {
                 return state.startIdx
+            },
+            sustainPedal: state => {
+                return state.sustainPedal
             }
         }
     })
