@@ -1,5 +1,7 @@
 # Give me pitch
 
+[![CircleCI](https://circleci.com/gh/carwestsam/GiveMePitch.svg?style=svg)](https://circleci.com/gh/carwestsam/GiveMePitch)
+
 Easy way for mobile phone to give Voice
 
 ## TODO 
@@ -8,11 +10,11 @@ Easy way for mobile phone to give Voice
 [x]  a keyboard
 [x]  several keyboard
 [x]  could play mutiple key at same time
-[ ]  should have cancel button to stop playing
-[ ]  should have simplifier score keyboard
+[x]  should have cancel button to stop playing
+[x]  should have simplifier score keyboard
 [ ]  should have a menu
-[ ]  should have option to transposing
-[ ]  should have have page footer
+[x]  should have option to transposing
+[x]  should have have page footer
 [ ]  should have a pipeline to deploy
 
 ## CMDS
