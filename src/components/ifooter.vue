@@ -16,15 +16,18 @@
         xs12
       >
       </v-flex>
-      <v-btn
+      <router-link
         v-for="link in links"
-        :key="link"
+        :key="link.path"
         color="white"
+        class="v-btn--flat v-btn--round white--text"
         flat
         round
+        v-bind:to="link.path"
+        tag="v-btn"
       >
-        {{ link }}
-      </v-btn>
+        {{link.name}}
+      </router-link>
       <v-flex
         class="grey grey--lighten-2--text"
         py-3
@@ -41,9 +44,9 @@
   export default {
     data: () => ({
       links: [
-        '找音键盘',
-        '文章',
-        '关于我',
+        {path: '/keyboard', name: '找音键盘'},
+        {path: '/toc', name: '文章'},
+        {path: '/profile', name: '关于我'}
       ]
     })
   }

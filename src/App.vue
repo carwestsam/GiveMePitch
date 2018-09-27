@@ -1,6 +1,7 @@
 <template>
   <v-app class='iapp grey'>
-    <keyboard></keyboard>
+    <!-- <keyboard></keyboard> -->
+    <router-view></router-view>
     <ifooter></ifooter>
   </v-app>
 </template>

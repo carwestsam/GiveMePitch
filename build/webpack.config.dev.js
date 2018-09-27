@@ -3,6 +3,11 @@
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 module.exports = {
   mode: 'development',
