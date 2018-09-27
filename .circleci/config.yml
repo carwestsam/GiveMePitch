@@ -24,14 +24,14 @@ jobs:
       - run: yarn build
       - setup_remote_docker:
           docker_layer_caching: true
-      - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
+      # - run:
+      #     name: Install Docker client
+      #     command: |
+      #       set -x
+      #       VER="17.03.0-ce"
+      #       curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+      #       tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+      #       mv -f /tmp/docker/* /usr/bin
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker login -u $DOCKER_USER -p $DOCKER_PASS
@@ -39,3 +39,9 @@ jobs:
           docker tag carwestsam/GiveMePitch:$CIRCLE_BRANCH carwestsam/GiveMePitch:$TAG
           docker push carwestsam/GiveMePitch:$CIRCLE_BRANCH
           docker push carwestsam/GiveMePitch:$TAG
+
+  deployment:
+    dev:
+      branch: master
+      commands:
+        - ssh ec2-user@acapella.ninja 'cd /home/ec2-user && docker pull carwestsam/GiveMePitch:master && docker rm gmp && docker run -p 80:80 --name gmp carwestsam/GiveMePitch:master'
