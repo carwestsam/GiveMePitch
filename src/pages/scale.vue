@@ -11,21 +11,27 @@
                 >
                 <v-flex xs12>
                     <v-slider
-                        :min="left"
-                        :max="left*2.0"
+                        :min="min"
+                        :max="max"
                         v-model="frequency"
-                        thumb-label="always"
+                        step="0.01"
                         ></v-slider>
                 </v-flex>
                 </v-layout>
             </v-container>
         </v-toolbar>
-        <div class="player">
-            <v-btn @click="start_origin()">播放根音</v-btn>
-            <v-btn @click="stop_origin()">停止根音</v-btn>
-            <v-btn @click="start()">开始音阶</v-btn>
-            <v-btn @click="stop()">关闭音阶</v-btn>
-        </div>
+        <v-flex xs12 sm6 class="py-2 player" >
+            <p>根音频率： {{left}} </p>
+            <p>变音频率： {{frequency}} </p>
+            <v-btn-toggle v-model="toggle_multiple" multiple>
+            <v-btn flat>
+                播放根音
+            </v-btn>
+            <v-btn flat>
+                播放变音
+            </v-btn>
+            </v-btn-toggle>
+        </v-flex>
 
         <div class="key-group">
             <h3> 五声音阶 </h3>
@@ -47,10 +53,9 @@
                 </div>
             </div>
         </div>
-                <div class="key-group">
+        <div class="key-group">
             <h3> 纯律音阶 </h3>
             <div class="key-group-inner">
-                
                 <div v-for="(v,k) in right3" :key="k" @click="sw(v)"
                     class="key">
                     {{k}}
@@ -72,11 +77,11 @@ export default {
         let mid = Math.pow ( 2, 1.0/1200.0 )
         let compressor = new Tone.Compressor().toMaster()
         let osc = new Tone.Oscillator({
-			"frequency" : left ,
+			"frequency" : left * 1.5,
 			"volume" : 0
 		}).connect(compressor);
         let origin = new Tone.Oscillator({
-			"frequency" : left ,
+			"frequency" : left,
 			"volume" : 0
 		}).connect(compressor);
 
@@ -133,26 +138,13 @@ export default {
              left,
              min: left * 0.9,
              max: left* 2.2,
-             frequency: left
+             bottom: false,
+             upper: false,
+             toggle_multiple: [],
+             frequency: left*1.5
         }
     },
     methods: {
-        start: function () {
-            this.osc.start();
-            // Tone.Master.volume.rampTo(0, 0.05);
-        },
-        stop: function () {
-            let $this = this
-            this.osc.stop();
-            // Tone.Master.volume.rampTo(-Infinity, 0.05);
-        },
-        start_origin: function () {
-            this.origin.start()
-            
-        },
-        stop_origin: function () {
-            this.origin.stop()
-        },
         sw: function (newValue) {
             this.osc.frequency.value = newValue
             this.osc.volume.value =  Math.floor(5.0 - newValue/50.0)
@@ -164,7 +156,23 @@ export default {
             console.log(newValue, Math.floor(5.0 - newValue/30.0));
             this.osc.frequency.value = newValue
             this.osc.volume.value =  Math.floor(5.0 - newValue/50.0)
-        }, 100)
+        }, 100),
+        toggle_multiple: function (newValue, oldVaule) {
+            let vobj = {}
+            _.each(newValue, v => {vobj[v] = true})
+            if ( this.bottom != (0 in vobj) ) {
+                if (this.bottom == false) this.origin.start()
+                else this.origin.stop()
+                this.bottom = ! this.bottom
+            }
+            if ( this.upper != (1 in vobj) ) {
+                if (this.upper == false) this.osc.start()
+                else this.osc.stop()
+                this.upper = ! this.upper
+            }
+            console.log('obj', vobj)
+            console.log('newValue', newValue)
+        }
     }
 }
 </script>
@@ -172,9 +180,9 @@ export default {
 <style scoped>
 .toolbar {
     width: 100%;
-    padding-top: 2em;
+    // padding-top: 2em;
 }
 .player {
-    margin-top: 6em;
+    margin-top: 4em;
 }
 </style>
