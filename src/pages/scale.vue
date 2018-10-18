@@ -147,15 +147,15 @@ export default {
     methods: {
         sw: function (newValue) {
             this.osc.frequency.value = newValue
-            this.osc.volume.value =  Math.floor(5.0 - newValue/50.0)
+            // this.osc.volume.value =  Math.floor(5.0 - newValue/50.0)
             this.frequency = newValue
         }
     },
     watch: {
         frequency: _.throttle(function ( newValue, oldValue ) {
-            console.log(newValue, Math.floor(5.0 - newValue/30.0));
+            // console.log(newValue, Math.floor(5.0 - newValue/30.0));
             this.osc.frequency.value = newValue
-            this.osc.volume.value =  Math.floor(5.0 - newValue/50.0)
+            // this.osc.volume.value =  Math.floor(5.0 - newValue/50.0)
         }, 100),
         toggle_multiple: function (newValue, oldVaule) {
             let vobj = {}
