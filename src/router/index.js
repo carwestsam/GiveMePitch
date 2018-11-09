@@ -1,9 +1,10 @@
 import VueRouter from 'vue-router'
 
-import profile from '../pages/profile.vue'
-import toc from '../pages/toc.vue'
-import keyboard from '../pages/keyboard.vue'
-import scale from '../pages/scale.vue'
+const profile = () => import('../pages/profile.vue')
+const toc = () => import('../pages/toc.vue')
+const keyboard = () =>  import('../pages/keyboard.vue')
+// import scale from '../pages/scale.vue'
+const scale = () => import('../pages/scale.vue')
 
 const routes = [
     { path: '/profile', component: profile },
