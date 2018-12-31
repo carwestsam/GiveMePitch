@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 const profile = () => import('../pages/profile.vue')
 const toc = () => import('../pages/toc.vue')
 const keyboard = () =>  import('../pages/keyboard.vue')
+const egp = () => import('../pages/egp.vue')
 // import scale from '../pages/scale.vue'
 const scale = () => import('../pages/scale.vue')
 
@@ -11,6 +12,7 @@ const routes = [
     { path: '/', component: toc },
     { path: '/toc', component: toc },
     { path: '/keyboard', component: keyboard },
+    // { path: '/egp', component: egp},
     { path: '/scale', component: scale }
   ]
 

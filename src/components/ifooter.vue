@@ -47,7 +47,7 @@
         {path: '/keyboard', name: '找音键盘'},
         {path: '/scale', name: '音阶键盘'},
         {path: '/toc', name: '文章'},
-        {path: '/profile', name: '关于我'}
+        {path: '/profile', name: '关于我'},
       ]
     })
   }

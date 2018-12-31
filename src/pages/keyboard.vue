@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="center-content white">合唱忍者的找音键盘</h1>
+        <!-- <h1 class="center-content white">合唱忍者的找音键盘</h1> -->
         <keyGroup v-bind:start_note="startPoint+36" ></keyGroup>
         <keyGroup v-bind:start_note="startPoint+24" ></keyGroup>
         <keyGroup v-bind:start_note="startPoint+12" ></keyGroup>
