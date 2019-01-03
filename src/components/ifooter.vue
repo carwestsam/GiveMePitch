@@ -35,7 +35,7 @@
         white--text
         xs12
       >
-        &copy;2018 — <strong>合唱忍者</strong>
+        &copy;2018 — <strong>合唱学徒</strong>
       </v-flex>
     </v-layout>
   </v-footer>
