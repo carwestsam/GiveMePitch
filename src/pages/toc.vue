@@ -24,6 +24,7 @@ export default {
                 'name': '金秋记忆',
                 'contents': [
                     {name: '第一章：硕果仅存', link: 'https://mp.weixin.qq.com/s/r0njVi99JiPBlfGulGITBQ'}
+                    {name: '第二章：背锅侠', link: 'https://mp.weixin.qq.com/s/kmMWWW9lIWuZ4rN29n8scw'}
                 ]
             },{
                 'name': '土法合唱训练',
